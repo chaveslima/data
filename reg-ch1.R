@@ -12,10 +12,28 @@ summary(reg)
 abline(reg,col="red")
 grid()
 #
-Cest=fitted(reg)
-#
 R=Renda;C=Consumo
 for(i in 1:26){
   segments(R[i],C[i],R[i],Cest[i], col="blue", lty=2)}
+#
+# Extraindo as estatisticas individualmente
+e=resid(reg);e
+b0=coefficients(reg)[1];b0
+b1=coefficients(reg)[2];b1
+Sb0=summary(reg)$coefficients[, 2][1];Sb0
+Sb1=summary(reg)$coefficients[, 2][2];Sb1
+t0=b0/Sb0;t0
+t1=b1/Sb1;t1
+####
+anova(reg)
+###
+SQR=anova(reg)[1,2];SQR # Soma do Quadrado da Regressao
+SQE=anova(reg)[2,2];SQE # Soma do Quadrado dos Erros
+SQT = SQR + SQE;SQT # SQT=Soma dos Quadrados Totais
+R2=SQR/SQT;R2 # R-quadrado
+#
+QMR=anova(reg)[1,3];QMR # Quadrado Medio da Regressão
+QME=anova(reg)[2,3];QME # Quadrado Medio dos Erros
+F=QMR/QME;F # F de Snedecor
 #
 
