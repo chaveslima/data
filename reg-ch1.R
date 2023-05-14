@@ -75,3 +75,10 @@ plot(EXPO,PIB, col="blue",pch=19, ylab="PIB (U$ Bi)",
 abline(reg,col="red")
 grid()
 #
+# Grafico usando ggplot
+library("ggplot2")
+dados=data.frame(cbind(PIB,EXPO))
+ggplot(dados, aes(x=EXPO, y=PIB)) + 
+  geom_point(col='blue') + 
+  geom_smooth(method = "lm",col='red')+
+  labs(x = "EXPO (U$ Bi)", y = "PIB (U$ Bi)")
