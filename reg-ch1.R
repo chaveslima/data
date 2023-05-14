@@ -41,20 +41,17 @@ F=QMR/QME;F # F de Snedecor
 #########################
 ####### Exercicio #######
 #########################
+##  Coreia de 1960 a 2021
+#
 install.packages('WDI')
 library(WDI)
-#
-##  Coreia de 1960 a 2021
 # GDP current U$
-X=WDI(country="KOR", indicator = "NY.GDP.MKTP.CD")
-X
-x=X[2:47,5]
-plot.ts(rev(x))
-#
-# EXPORTS current U$
-Y=WDI(country="KOR", indicator = "BX.GSR.TOTL.CD")
+Y=WDI(country="KOR", indicator = "NY.GDP.MKTP.CD");Y
 y=Y[2:47,5]
-# Transformar em biloes
+# EXPORTS current U$
+X=WDI(country="KOR", indicator = "BX.GSR.TOTL.CD");X
+x=X[2:47,5]
+# Transformar em bilhoes
 PIB=y/(10**9)
 EXPO=x/(10**9)
 # Regressao linear
