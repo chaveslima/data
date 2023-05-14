@@ -11,7 +11,9 @@ reg = lm(Consumo~Renda)
 summary(reg)
 abline(reg,col="red")
 grid()
+
 #
+Cest=
 R=Renda;C=Consumo
 for(i in 1:26){
   segments(R[i],C[i],R[i],Cest[i], col="blue", lty=2)}
@@ -36,4 +38,30 @@ QMR=anova(reg)[1,3];QMR # Quadrado Medio da Regressão
 QME=anova(reg)[2,3];QME # Quadrado Medio dos Erros
 F=QMR/QME;F # F de Snedecor
 #
-
+#########################
+####### Exercicio #######
+#########################
+install.packages('WDI')
+library(WDI)
+#
+##  Coreia de 1960 a 2021
+# GDP current U$
+X=WDI(country="KOR", indicator = "NY.GDP.MKTP.CD")
+X
+x=X[2:47,5]
+plot.ts(rev(x))
+#
+# EXPORTS current U$
+Y=WDI(country="KOR", indicator = "BX.GSR.TOTL.CD")
+y=Y[2:47,5]
+# Transformar em biloes
+PIB=y/(10**9)
+EXPO=x/(10**9)
+# Regressao linear
+reg=lm(PIB~EXPO)
+summary(reg)
+# Grafico
+plot(EXPO,PIB, col="blue",pch=19, ylab="PIB (U$ Bi)",
+     xlab="EXPO (U$ Bi)")
+abline(reg,col="red")
+grid()
