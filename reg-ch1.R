@@ -13,7 +13,7 @@ abline(reg,col="red")
 grid()
 
 #
-Cest=
+Cest=fitted.values(reg)
 R=Renda;C=Consumo
 for(i in 1:26){
   segments(R[i],C[i],R[i],Cest[i], col="blue", lty=2)}
@@ -42,7 +42,7 @@ F=QMR/QME;F # F de Snedecor
 ####### Exercicio #######
 #########################
 ##  Coreia de 1960 a 2021
-#
+# 
 install.packages('WDI')
 library(WDI)
 # GDP current U$
@@ -57,8 +57,21 @@ EXPO=x/(10**9)
 # Regressao linear
 reg=lm(PIB~EXPO)
 summary(reg)
+#
+# Elasticidade de b1 (Eb1)
+coefficients(reg)[2]
+# Media de EXPO
+mean(EXPO)
+# Media do PIB
+mean(PIB)
+# 
+Eb1 = coefficients(reg)[2]*(mean(EXPO)/mean(PIB))
+Eb1
+
+#
 # Grafico
 plot(EXPO,PIB, col="blue",pch=19, ylab="PIB (U$ Bi)",
      xlab="EXPO (U$ Bi)")
 abline(reg,col="red")
 grid()
+#
