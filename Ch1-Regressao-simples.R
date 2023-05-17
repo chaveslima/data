@@ -1,17 +1,21 @@
 set.seed(123)
-Renda=seq(2,12,by=0.4)
-e=rnorm(Renda,0,2)
-Consumo = 1.2 + 0.98*Renda + 0.6*e
-Renda
+# gerar 2 erros aleatorios
+e1=rnorm(26,0,1)
+e2=rnorm(26,0,1)
+# Gerar variavel Renda
+Renda=seq(2,12,by=0.4) + e1
+# Gerar variável consumo
+Consumo = 4 + 0.98*Renda + e2
+# print 
 round(Consumo,1)
+round(Renda,1)
 #
 plot(Renda,Consumo, col="blue",pch=19, ylab="Consumo (R$ 1000,00)",
-            xlab="Renda (R$ 1000,00)",ylim=c(2,14))
+            xlab="Renda (R$ 1000,00)",ylim=c(5,15))
+grid()
 reg = lm(Consumo~Renda)
 summary(reg)
 abline(reg,col="red")
-grid()
-
 #
 Cest=fitted.values(reg)
 R=Renda;C=Consumo
@@ -57,7 +61,6 @@ EXPO=x/(10**9)
 # Regressao linear
 reg=lm(PIB~EXPO)
 summary(reg)
-#
 # Elasticidade de b1 (Eb1)
 coefficients(reg)[2]
 # Media de EXPO
@@ -68,7 +71,6 @@ mean(PIB)
 Eb1 = coefficients(reg)[2]*(mean(EXPO)/mean(PIB))
 Eb1
 
-#
 # Grafico
 plot(EXPO,PIB, col="blue",pch=19, ylab="PIB (U$ Bi)",
      xlab="EXPO (U$ Bi)")
@@ -82,3 +84,6 @@ ggplot(dados, aes(x=EXPO, y=PIB)) +
   geom_point(col='blue') + 
   geom_smooth(method = "lm",col='red')+
   labs(x = "EXPO (U$ Bi)", y = "PIB (U$ Bi)")
+
+
+
