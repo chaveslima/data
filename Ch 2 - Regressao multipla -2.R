@@ -13,3 +13,7 @@ k=K[2:33,5]/(10**12); plot.ts(rev(k)); k
 #
 reg=lm(y~l+k)
 summary(reg)
+#Elasticidades
+Eb1 = coefficients(reg)[2]*(mean(l)/mean(y));Eb1
+Eb2 = coefficients(reg)[3]*(mean(k)/mean(y));Eb2
+
