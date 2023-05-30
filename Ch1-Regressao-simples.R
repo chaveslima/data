@@ -1,17 +1,16 @@
-set.seed(123)
-# gerar 2 erros aleatorios
-e1=rnorm(26,0,1)
-e2=rnorm(26,0,1)
+set.seed(11)
+# gerar o erros aleatorio
+e=rnorm(26,0,1)
 # Gerar variavel Renda
-Renda=seq(2,12,by=0.4) + e1
+Renda=seq(2,12,by=0.4)
 # Gerar variável consumo
-Consumo = 4 + 0.98*Renda + e2
-# print 
+Consumo = 4 + 0.98*Renda + e
+# print valores arredondados de Consumo e Renda 
 round(Consumo,1)
 round(Renda,1)
 #
 plot(Renda,Consumo, col="blue",pch=19, ylab="Consumo (R$ 1000,00)",
-            xlab="Renda (R$ 1000,00)",ylim=c(5,15))
+           xlab="Renda (R$ 1000,00)",ylim=c(5,16))
 grid()
 reg = lm(Consumo~Renda)
 summary(reg)
@@ -30,14 +29,13 @@ Sb0=summary(reg)$coefficients[, 2][1];Sb0
 Sb1=summary(reg)$coefficients[, 2][2];Sb1
 t0=b0/Sb0;t0
 t1=b1/Sb1;t1
-####
+#### ANOVA completa
 anova(reg)
-###
+### ANOVA por componente
 SQR=anova(reg)[1,2];SQR # Soma do Quadrado da Regressao
 SQE=anova(reg)[2,2];SQE # Soma do Quadrado dos Erros
 SQT = SQR + SQE;SQT # SQT=Soma dos Quadrados Totais
 R2=SQR/SQT;R2 # R-quadrado
-#
 QMR=anova(reg)[1,3];QMR # Quadrado Medio da Regressão
 QME=anova(reg)[2,3];QME # Quadrado Medio dos Erros
 F=QMR/QME;F # F de Snedecor
@@ -84,6 +82,5 @@ ggplot(dados, aes(x=EXPO, y=PIB)) +
   geom_point(col='blue') + 
   geom_smooth(method = "lm",col='red')+
   labs(x = "EXPO (U$ Bi)", y = "PIB (U$ Bi)")
-
 
 
